@@ -33,7 +33,7 @@ async def get_integration_json(request: Request):
                     "default": "mongodb://localhost:27017/testdbPulse",
                 },
                 {
-                    "label": "time_interval",
+                    "label": "interval",
                     "type": "dropdown",
                     "required": True,
                     "default": "* * * * *",
