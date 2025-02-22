@@ -34,15 +34,9 @@ async def get_integration_json(request: Request):
                 },
                 {
                     "label": "interval",
-                    "type": "dropdown",
+                    "type": "text",
                     "required": True,
-                    "default": "* * * * *",
-                    "options": [
-                        "* * * * *",
-                        "*/5 * * * *",
-                        "*/30 * * * *",
-                        "0 * * * *",
-                    ],
+                    "default": "* * * * *"
                 },
             ],
             "target_url": f"{base_url}/api/integration.json",
