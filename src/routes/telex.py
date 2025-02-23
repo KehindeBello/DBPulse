@@ -30,7 +30,7 @@ async def get_integration_json(request: Request):
                     "label": "db_uri",
                     "type": "text",
                     "required": True,
-                    "default": "mongodb://localhost:27017/testdbPulse",
+                    "default": "mongodb+srv://adedotunomomeji:3nuDpwx3!Tkbwj2@clusternew.tep94.mongodb.net/?retryWrites=true&w=majority&appName=ClusterNew/test",
                 },
                 {
                     "label": "interval",
