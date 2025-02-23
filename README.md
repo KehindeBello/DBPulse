@@ -60,6 +60,7 @@ Once that is done, you can should see the application in your telex dashboard.
 
 Click on Manage App -> Settings and then set your `DB_URI` and `TIME_INTERVAL` (cron equivalent for the interval you wish to receive data).
 **Ensure that the DB_URI has cluster monitoring role enabled.**
+**It is recommended that the Cluster is on a dedicated server(example is MongoDB Atlas M10, M20, M30) for accurate memory usage monitoring.**
 
 ![image](https://dbpulse.s3.us-east-1.amazonaws.com/Screenshot+2025-02-23+014812.png)
 
