@@ -3,6 +3,7 @@ import requests
 from pymongo import MongoClient
 from models.models import MonitorPayload
 
+
 def format_uptime_message(uptime_seconds):
     days = uptime_seconds // (24 * 3600)
     remaining_hours = (uptime_seconds % (24 * 3600)) // 3600
@@ -40,6 +41,7 @@ async def server_status(payload: MonitorPayload, local_mode=False) -> Dict[str, 
         client = MongoClient(db_uri)
         db = client[database]
         server_status = db.command("serverStatus")
+        print(f"Server Status: {server_status}")
         if not server_status:
             raise Exception("Failed to retrieve server status")
 
@@ -58,16 +60,16 @@ async def server_status(payload: MonitorPayload, local_mode=False) -> Dict[str, 
         delete_count = opcounters["delete"]
 
         message = (
-            f"{format_uptime_message(uptime_seconds)}\n"
-            f"Connections: {current_connections} / {available_connections} available\n"
-            f"Memory: {server_status['mem']['resident']} MB / {server_status['mem']['virtual']} MB\n"
-            "Operation counters:\n"
+            f"🚀 {format_uptime_message(uptime_seconds)}\n"
+            f"🔗 Connections: {current_connections} / {available_connections} available\n"
+            f"🖥️ Memory Usage: {server_status['mem']['resident']} MB **(Resident)** / {server_status['mem']['virtual']} MB **(Virtual)**\n"
+            "\n📊 Operation Counters:\n"
             + "\n".join(
                 [
-                    f"  query: {query_count}",
-                    f"  update: {update_count}",
-                    f"  insert: {insert_count}",
-                    f"  delete: {delete_count}",
+                    f"   📌 Queries: {query_count}",
+                    f"   ✏️ Updates: {update_count}",
+                    f"   📥 Inserts: {insert_count}",
+                    f"   🗑️ Deletes: {delete_count}",
                 ]
             )
         )
@@ -91,7 +93,7 @@ async def server_status(payload: MonitorPayload, local_mode=False) -> Dict[str, 
             try:
                 requests.post(
                     payload["return_url"],
-                json={
+                    json={
                         "message": error_msg,
                         "username": "dbPulse",
                         "event_name": "Database Status",
