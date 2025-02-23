@@ -30,11 +30,9 @@ To get started with DBPulse, follow these steps:
    pip install -r requirements.txt
    ```
 
-## Usage 
+## Usage - Local Monitoring
 
 You can configure the MongoDB connection settings in the `.env` file. Check `env.example` for the required variables. Ensure the connection string has the `cluster monitoring` role enabled.
-
-## Local Monitoring
 
 To monitor your MongoDB instance locally without setting up the web server, use the CLI tool:
 
@@ -44,6 +42,28 @@ python cli.py
 ```
 
 This will display MongoDB metrics in your console and refresh every 10 seconds. Press Ctrl+C to stop monitoring.
+
+## Intergating with Telex
+
+To integrate with Telex, you need to deploy the app to a server and copy the `integration.json` endpoint url to your telex 
+integration.
+
+```bash
+{base_url}/api/integration.json
+```
+
+![image](https://dbpulse.s3.us-east-1.amazonaws.com/Screenshot+2025-02-23+014717.png)
+
+Once that is done, you can should see the application in your telex dashboard.
+
+![image](https://dbpulse.s3.us-east-1.amazonaws.com/Screenshot+2025-02-23+013723.png)
+
+Click on Manage App -> Settings and then set your `DB_URI` and `TIME_INTERVAL` (cron equivalent for the interval you wish to receive data).
+**Ensure that the DB_URI has cluster monitoring role enabled.**
+
+![image](https://dbpulse.s3.us-east-1.amazonaws.com/Screenshot+2025-02-23+014812.png)
+
+Save your settings and you should start receiving data as scheduled in the telex channel for which the integration was added 
 
 ## Contributing
 
