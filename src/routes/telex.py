@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Request
-
+from core.config import settings    
 router = APIRouter()
 
 
@@ -30,7 +30,7 @@ async def get_integration_json(request: Request):
                     "label": "db_uri",
                     "type": "text",
                     "required": True,
-                    "default": "mongodb+srv://adedotunomomeji:3nuDpwx3!Tkbwj2@clusternew.tep94.mongodb.net/?retryWrites=true&w=majority&appName=ClusterNew/test",
+                    "default": settings.DB_URI,
                 },
                 {
                     "label": "interval",
