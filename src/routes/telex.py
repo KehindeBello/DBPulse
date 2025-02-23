@@ -39,6 +39,7 @@ async def get_integration_json(request: Request):
                     "default": "* * * * *"
                 },
             ],
+            "target_url": "",
             "tick_url": f"{base_url}/api/tick",
         }
     }
