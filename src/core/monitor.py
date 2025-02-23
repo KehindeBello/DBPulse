@@ -41,7 +41,7 @@ async def server_status(payload: MonitorPayload, local_mode=False) -> Dict[str, 
         client = MongoClient(db_uri)
         db = client[database]
         server_status = db.command("serverStatus")
-        print(f"Server Status: {server_status}")
+        
         if not server_status:
             raise Exception("Failed to retrieve server status")
 
