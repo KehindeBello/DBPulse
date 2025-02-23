@@ -62,7 +62,7 @@ async def server_status(payload: MonitorPayload, local_mode=False) -> Dict[str, 
         message = (
             f"🚀 {format_uptime_message(uptime_seconds)}\n"
             f"🔗 Connections: {current_connections} / {available_connections} available\n"
-            f"🖥️ Memory Usage: {server_status['mem']['resident']} MB **(Resident)** / {server_status['mem']['virtual']} MB **(Virtual)**\n"
+            f"🖥️ Memory Usage: {server_status['mem']['resident']} MB / {server_status['mem']['virtual']} MB\n"
             "\n📊 Operation Counters:\n"
             + "\n".join(
                 [
