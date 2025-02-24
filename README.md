@@ -30,11 +30,36 @@ To get started with DBPulse, follow these steps:
    pip install -r requirements.txt
    ```
 
-## Usage - Local Monitoring
+4. Start the server:
 
-You can configure the MongoDB connection settings in the `.env` file. Check `env.example` for the required variables. Ensure the connection string has the `cluster monitoring` role enabled.
+   ```bash
+   uvicorn main:app --reload --app-dir src
+   ```
+
+5. Make a post request to the `/api/tick` endpoint with the following payload:
+
+   ```bash
+   {
+      "channel_id": "1234567890",   
+      "return_url": "http://localhost:8000/tick", // URL to send the data to
+      "settings": [
+         {
+            "label": "db_uri",
+            "type": "text",
+            "required": true,
+            "default": "mongodb://localhost:27017/test" // URI of the database to monitor
+         }
+      ]
+   }
+   ```
+
+## Local Monitoring
 
 To monitor your MongoDB instance locally without setting up the web server, use the CLI tool:
+
+Configure the MongoDB connection settings in the `.env` file. Check `env.example` for the required variables. Ensure the connection string has the `cluster monitoring` role enabled.
+
+
 
 ```bash
 cd src
@@ -65,6 +90,16 @@ Click on Manage App -> Settings and then set your `DB_URI` and `TIME_INTERVAL` (
 ![image](https://dbpulse.s3.us-east-1.amazonaws.com/Screenshot+2025-02-23+014812.png)
 
 Save your settings and you should start receiving data as scheduled in the telex channel for which the integration was added 
+
+## Testing the integration on telex
+
+To test the integration on telex, you can use this curl command: - I have provided a mongodb uri and telex channel id for testing. Channel name - dbpulse
+
+```bash
+
+curl -X POST "https://dbpulse.onrender.com/api/tick" -H "Content-Type: application/json" -d "{\"channel_id\": \"12345d\", \"return_url\": \"https://ping.telex.im/v1/webhooks/0195370a-c6a0-7904-9e75-dbd2b5f7c035\", \"settings\": [{\"label\": \"db_uri\", \"type\": \"text\", \"required\": true, \"default\": \"mongodb+srv://adedotunomomeji:3nuDpwx3!Tkbwj2@clusternew.tep94.mongodb.net/?retryWrites=true^&w=majority^&appName=ClusterNew/test\"}]}"
+
+```
 
 ## Contributing
 
